@@ -1,17 +1,12 @@
-namespace Bubblefy.Data;
+using Bubblefy.Model;
+
+namespace Bubblefy.Business;
 
 public class MotorBuscaMusical
 {
-    private readonly List<Faixa> _faixas;
-
-    public MotorBuscaMusical(List<Faixa> faixas)
+    public List<Faixa> Buscar(IEnumerable<Faixa> faixas, FiltroBusca filtro)
     {
-        _faixas = faixas;
-    }
-
-    public List<Faixa> Buscar(FiltroBusca filtro)
-    {
-        return _faixas.Where(f =>
+        return faixas.Where(f =>
             (filtro.Genero == null || f.Genero == filtro.Genero) &&
             (filtro.Pais == null || f.Pais == filtro.Pais) &&
             (filtro.Ano == null || f.Ano == filtro.Ano) &&

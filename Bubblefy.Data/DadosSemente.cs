@@ -1,3 +1,5 @@
+using Bubblefy.Model;
+
 namespace Bubblefy.Data;
 
 public static class DadosSemente

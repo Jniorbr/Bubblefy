@@ -1,4 +1,4 @@
-namespace Bubblefy.Data;
+namespace Bubblefy.Model;
 
 public class FiltroBusca
 {

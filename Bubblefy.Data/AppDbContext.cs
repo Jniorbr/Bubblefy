@@ -1,11 +1,12 @@
+using Bubblefy.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bubblefy.Data;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Faixa> Faixas { get; set; }
-    public DbSet<Playlist> Playlists { get; set; }  
+    public DbSet<Faixa> Faixas => Set<Faixa>();
+    public DbSet<Playlist> Playlists => Set<Playlist>();
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
