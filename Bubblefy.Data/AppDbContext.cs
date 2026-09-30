@@ -8,9 +8,12 @@ public class AppDbContext : DbContext
     public DbSet<Faixa> Faixas => Set<Faixa>();
     public DbSet<Playlist> Playlists => Set<Playlist>();
 
+    private readonly string connectionString =
+        "server=localhost;port=3305;database=Bubblefy;uid=root;pwd=1234";
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=bubblefy.db");
+        optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
