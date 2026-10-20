@@ -6,12 +6,13 @@ namespace Bubblefy.Service;
 
 public class PlaylistService(AppDbContext context)
 {
-    public List<Playlist> Listar() => context.Playlists
+    public List<Playlist> Listar(int usuarioId) => context.Playlists
+        .Where(playlist => playlist.UsuarioId == usuarioId)
         .Include(playlist => playlist.Faixas)
         .AsNoTracking()
         .ToList();
 
-    public Playlist Criar(string nome, IEnumerable<Faixa> faixas)
+    public Playlist Criar(int usuarioId, string nome, IEnumerable<Faixa> faixas)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(nome);
 
@@ -23,7 +24,7 @@ public class PlaylistService(AppDbContext context)
             .Where(faixa => faixaIds.Contains(faixa.Id))
             .ToList();
 
-        Playlist playlist = new() { Nome = nome, Faixas = faixasPersistidas };
+        Playlist playlist = new() { Nome = nome, UsuarioId = usuarioId, Faixas = faixasPersistidas };
         context.Playlists.Add(playlist);
         context.SaveChanges();
         return playlist;

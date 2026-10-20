@@ -13,6 +13,7 @@ public static class BubblefyServiceCollectionExtensions
         services.AddScoped<MotorBuscaMusical>();
         services.AddScoped<FaixaService>();
         services.AddScoped<PlaylistService>();
+        services.AddScoped<UsuarioService>();
         return services;
     }
 

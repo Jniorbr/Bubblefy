@@ -7,6 +7,7 @@ public class AppDbContext : DbContext
 {
     public DbSet<Faixa> Faixas => Set<Faixa>();
     public DbSet<Playlist> Playlists => Set<Playlist>();
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
 
     private readonly string connectionString =
         "server=localhost;port=3305;database=Bubblefy;uid=root;pwd=1234";
@@ -22,5 +23,13 @@ public class AppDbContext : DbContext
             .HasMany(f => f.Playlists)
             .WithMany(p => p.Faixas)
             .UsingEntity(j => j.ToTable("FaixaPlaylist"));
+
+        modelBuilder.Entity<Usuario>()
+            .Property(u => u.Nome)
+            .HasMaxLength(50);
+
+        modelBuilder.Entity<Usuario>()
+            .HasIndex(u => u.Nome)
+            .IsUnique();
     }
 }

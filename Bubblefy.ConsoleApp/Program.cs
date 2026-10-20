@@ -9,17 +9,40 @@ provider.InitializeBubblefyDatabase();
 using IServiceScope scope = provider.CreateScope();
 FaixaService faixaService = scope.ServiceProvider.GetRequiredService<FaixaService>();
 PlaylistService playlistService = scope.ServiceProvider.GetRequiredService<PlaylistService>();
+UsuarioService usuarioService = scope.ServiceProvider.GetRequiredService<UsuarioService>();
 
+Usuario? usuarioLogado = null;
 bool continuar = true;
+
+Console.WriteLine("\nOlá, bem vindo a ferramenta Bubblefy");
+Console.WriteLine("Crie sua propria bolha!");
+
+while (continuar && usuarioLogado == null)
+{
+	Console.WriteLine("\n1 - Entrar\n2 - Cadastrar\n3 - Sair");
+	Console.Write("Escolha uma opcao: ");
+	string opcaoAcesso = Console.ReadLine() ?? string.Empty;
+
+	switch (opcaoAcesso)
+	{
+		case "1":
+			usuarioLogado = Entrar();
+			break;
+		case "2":
+			Cadastrar();
+			break;
+		case "3":
+			continuar = false;
+			break;
+		default:
+			Console.WriteLine("Opcao invalida.");
+			break;
+	}
+}
 
 while (continuar)
 {
-	Console.WriteLine("\nOlá, bem vindo a ferramenta Bubblefy");
-	Console.WriteLine("Crie sua propria bolha!\n");
-	Console.WriteLine("Insira seu usuario:");
-	string usuario = Console.ReadLine() ?? string.Empty;
-	Console.WriteLine($"Bem vindo {usuario} ");
-
+	Console.WriteLine($"\nBem vindo {usuarioLogado!.Nome}");
 	Console.WriteLine("\n1 - Ver todas as faixas\n2 - Criar lista a partir de filtros\n3 - Ver listas criadas\n4 - Sair");
 	Console.Write("Escolha uma opcao: ");
 	string opcao = Console.ReadLine() ?? string.Empty;
@@ -32,6 +55,59 @@ while (continuar)
 		case "4": continuar = false; break;
 		default: Console.WriteLine("Opcao invalida."); break;
 	}
+}
+
+Usuario? Entrar()
+{
+	Console.Write("Usuario: ");
+	string nome = Console.ReadLine() ?? string.Empty;
+	Console.Write("Senha: ");
+	string senha = LerSenha();
+
+	Usuario? usuario = usuarioService.Autenticar(nome, senha);
+	if (usuario == null)
+		Console.WriteLine("Usuario ou senha invalidos.");
+
+	return usuario;
+}
+
+void Cadastrar()
+{
+	Console.Write("Usuario: ");
+	string nome = Console.ReadLine() ?? string.Empty;
+	Console.Write("Senha: ");
+	string senha = LerSenha();
+
+	try
+	{
+		usuarioService.Cadastrar(nome, senha);
+		Console.WriteLine("Usuario cadastrado. Agora e so entrar.");
+	}
+	catch (Exception ex) when (ex is ArgumentException or InvalidOperationException)
+	{
+		Console.WriteLine(ex.Message);
+	}
+}
+
+string LerSenha()
+{
+	string senha = string.Empty;
+
+	while (true)
+	{
+		ConsoleKeyInfo tecla = Console.ReadKey(true);
+
+		if (tecla.Key == ConsoleKey.Enter)
+			break;
+
+		if (tecla.Key == ConsoleKey.Backspace && senha.Length > 0)
+			senha = senha[..^1];
+		else if (!char.IsControl(tecla.KeyChar))
+			senha += tecla.KeyChar;
+	}
+
+	Console.WriteLine();
+	return senha;
 }
 
 void CriarListaComFiltros()
@@ -70,7 +146,7 @@ void CriarListaComFiltros()
 		return;
 	}
 
-	playlistService.Criar(nome, resultado);
+	playlistService.Criar(usuarioLogado!.Id, nome, resultado);
 	Console.WriteLine("Lista \"" + nome + "\" criada com " + resultado.Count + " faixa(s).");
 }
 
@@ -113,7 +189,7 @@ string? ObterOpcao(List<string> opcoes)
 
 void VerPlaylists()
 {
-	List<Playlist> playlists = playlistService.Listar();
+	List<Playlist> playlists = playlistService.Listar(usuarioLogado!.Id);
 	if (playlists.Count == 0)
 	{
 		Console.WriteLine("Nenhuma lista criada ainda.");
