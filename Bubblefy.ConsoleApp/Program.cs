@@ -62,7 +62,7 @@ Usuario? Entrar()
 	Console.Write("Usuario: ");
 	string nome = Console.ReadLine() ?? string.Empty;
 	Console.Write("Senha: ");
-	string senha = LerSenha();
+	string senha = Console.ReadLine() ?? string.Empty;
 
 	Usuario? usuario = usuarioService.Autenticar(nome, senha);
 	if (usuario == null)
@@ -76,7 +76,7 @@ void Cadastrar()
 	Console.Write("Usuario: ");
 	string nome = Console.ReadLine() ?? string.Empty;
 	Console.Write("Senha: ");
-	string senha = LerSenha();
+	string senha = Console.ReadLine() ?? string.Empty;
 
 	try
 	{
@@ -87,27 +87,6 @@ void Cadastrar()
 	{
 		Console.WriteLine(ex.Message);
 	}
-}
-
-string LerSenha()
-{
-	string senha = string.Empty;
-
-	while (true)
-	{
-		ConsoleKeyInfo tecla = Console.ReadKey(true);
-
-		if (tecla.Key == ConsoleKey.Enter)
-			break;
-
-		if (tecla.Key == ConsoleKey.Backspace && senha.Length > 0)
-			senha = senha[..^1];
-		else if (!char.IsControl(tecla.KeyChar))
-			senha += tecla.KeyChar;
-	}
-
-	Console.WriteLine();
-	return senha;
 }
 
 void CriarListaComFiltros()
