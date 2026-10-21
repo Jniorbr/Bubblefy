@@ -1,3 +1,10 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Bubblefy.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+
 public class TokenService
 {
     private readonly IConfiguration _configuration;
@@ -5,6 +12,12 @@ public class TokenService
     {
         _configuration = configuration;
     }
+ 
+    public static object GetSigningKey(ConfigurationManager configuration)
+    {
+        throw new NotImplementedException();
+    }
+ 
     public string GenerateToken(Usuario usuario)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
