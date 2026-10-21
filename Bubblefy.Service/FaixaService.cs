@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bubblefy.Service;
 
-public class FaixaService(AppDbContext context, MotorBuscaMusical motorBusca)
+public class FaixaService(AppDbContext context, MotorBuscaMusical motorBusca) : IFaixaService
 {
     public List<Faixa> ObterFaixas() => context.Faixas.AsNoTracking().ToList();
+
+    public Faixa? ObterPorId(int id) => context.Faixas.AsNoTracking()
+        .FirstOrDefault(faixa => faixa.Id == id);
 
     public List<string> ObterGeneros() => context.Faixas
         .Where(faixa => faixa.Genero != null)

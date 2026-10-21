@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -6,45 +5,46 @@ using Bubblefy.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-=======
-using Bubblefy.Model;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
->>>>>>> 95f8a9d55bf0db36e594832008fcf298de01dafa
-public class TokenService
+namespace Bubblefy.Service;
+
+public class TokenService(IConfiguration configuration) : ITokenService
 {
-    private readonly IConfiguration _configuration;
-    public TokenService(IConfiguration configuration)
+    public static SymmetricSecurityKey GetSigningKey(IConfiguration configuration)
     {
-        _configuration = configuration;
+        string secretKey = configuration["JWTSettings:SecretKey"]
+            ?? throw new InvalidOperationException("JWTSettings:SecretKey nao foi configurada.");
+        byte[] keyBytes = Encoding.UTF8.GetBytes(secretKey);
+        if (keyBytes.Length < 32)
+            throw new InvalidOperationException("JWTSettings:SecretKey deve ter ao menos 32 bytes.");
+
+        return new SymmetricSecurityKey(keyBytes);
     }
- 
-    public static object GetSigningKey(ConfigurationManager configuration)
-    {
-        throw new NotImplementedException();
-    }
- 
+
     public string GenerateToken(Usuario usuario)
     {
+        string expirationSetting = configuration["JWTSettings:ExpirationInMinutes"]
+            ?? throw new InvalidOperationException("JWTSettings:ExpirationInMinutes nao foi configurada.");
+        if (!double.TryParse(expirationSetting, System.Globalization.NumberStyles.Number,
+                System.Globalization.CultureInfo.InvariantCulture, out double expirationInMinutes)
+            || expirationInMinutes <= 0)
+        {
+            throw new InvalidOperationException("JWTSettings:ExpirationInMinutes deve ser um numero positivo.");
+        }
+
         var tokenHandler = new JwtSecurityTokenHandler();
-        var jwtSettings = _configuration.GetSection("JWTSettings");
-        var chaveSecreta = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]);
-        var credenciais = new SigningCredentials(new SymmetricSecurityKey(chaveSecreta),
-        SecurityAlgorithms.HmacSha256Signature);
+        var credentials = new SigningCredentials(GetSigningKey(configuration), SecurityAlgorithms.HmacSha256);
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, usuario.Nome),
+            new(ClaimTypes.NameIdentifier, usuario.Id.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+            new(ClaimTypes.Name, usuario.Nome)
         };
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            SigningCredentials = credenciais,
-            Expires = DateTime.UtcNow.AddMinutes(double.Parse(jwtSettings["ExpirationInMinutes"])),
+            SigningCredentials = credentials,
+            Expires = DateTime.UtcNow.AddMinutes(expirationInMinutes)
         };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+
+        return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
     }
 }

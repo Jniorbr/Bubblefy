@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Bubblefy.Service;
 
-public class UsuarioService(AppDbContext context)
+public class UsuarioService(AppDbContext context) : IUsuarioService
 {
     public Usuario Cadastrar(string nome, string senha)
     {
@@ -24,6 +24,9 @@ public class UsuarioService(AppDbContext context)
 
     public Usuario? Autenticar(string nome, string senha)
     {
+        if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(senha))
+            return null;
+
         Usuario? usuario = context.Usuarios.AsNoTracking().FirstOrDefault(u => u.Nome == nome);
 
         if (usuario == null)
@@ -31,4 +34,8 @@ public class UsuarioService(AppDbContext context)
 
         return Senha.Verificar(senha, usuario.Salt, usuario.SenhaHash) ? usuario : null;
     }
+
+    public Usuario? ObterPorId(int id) => context.Usuarios
+        .AsNoTracking()
+        .FirstOrDefault(usuario => usuario.Id == id);
 }

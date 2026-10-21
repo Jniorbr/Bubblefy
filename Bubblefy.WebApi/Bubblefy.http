@@ -1,0 +1,62 @@
+# Configure JWTSettings__SecretKey (at least 32 bytes) and
+# JWTSettings__ExpirationInMinutes in the environment before starting the API.
+@baseUrl = http://localhost:5261
+@token = substituir-pelo-token-retornado-no-login
+
+### Cadastrar usuario
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "nome": "usuario-teste",
+  "senha": "senha-local-segura"
+}
+
+### Entrar e obter JWT
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "nome": "usuario-teste",
+  "senha": "senha-local-segura"
+}
+
+### Consultar usuario autenticado
+GET {{baseUrl}}/api/users/me
+Authorization: Bearer {{token}}
+
+### Listar faixas
+GET {{baseUrl}}/api/tracks
+
+### Buscar faixa por ID
+GET {{baseUrl}}/api/tracks/1
+
+### Buscar faixas por filtros
+GET {{baseUrl}}/api/tracks/search?genero=Rock&bpmMediaMinima=100&valenciaMinima=2
+
+### Listar generos
+GET {{baseUrl}}/api/tracks/genres
+
+### Listar paises
+GET {{baseUrl}}/api/tracks/countries
+
+### Listar playlists do usuario
+GET {{baseUrl}}/api/playlists
+Authorization: Bearer {{token}}
+
+### Obter playlist do usuario por ID
+GET {{baseUrl}}/api/playlists/1
+Authorization: Bearer {{token}}
+
+### Criar playlist a partir de IDs de faixas existentes
+POST {{baseUrl}}/api/playlists
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Minha playlist",
+  "faixaIds": [1, 2]
+}
+
+### Exemplo de erro: faixa inexistente
+GET {{baseUrl}}/api/tracks/999999

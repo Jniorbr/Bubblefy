@@ -12,8 +12,13 @@ public static class BubblefyServiceCollectionExtensions
         services.AddDbContext<AppDbContext>();
         services.AddScoped<MotorBuscaMusical>();
         services.AddScoped<FaixaService>();
+        services.AddScoped<IFaixaService>(serviceProvider => serviceProvider.GetRequiredService<FaixaService>());
         services.AddScoped<PlaylistService>();
+        services.AddScoped<IPlaylistService>(serviceProvider => serviceProvider.GetRequiredService<PlaylistService>());
         services.AddScoped<UsuarioService>();
+        services.AddScoped<IUsuarioService>(serviceProvider => serviceProvider.GetRequiredService<UsuarioService>());
+        services.AddScoped<TokenService>();
+        services.AddScoped<ITokenService>(serviceProvider => serviceProvider.GetRequiredService<TokenService>());
         return services;
     }
 
