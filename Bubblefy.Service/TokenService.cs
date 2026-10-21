@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -5,6 +6,14 @@ using Bubblefy.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
+=======
+using Bubblefy.Model;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+>>>>>>> 95f8a9d55bf0db36e594832008fcf298de01dafa
 public class TokenService
 {
     private readonly IConfiguration _configuration;
