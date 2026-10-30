@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "Bubblefy.Business/1.0.0": {
+        "dependencies": {
+          "Bubblefy.Model": "1.0.0"
+        },
+        "runtime": {
+          "Bubblefy.Business.dll": {}
+        }
+      },
+      "Bubblefy.Model/1.0.0": {
+        "runtime": {
+          "Bubblefy.Model.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Bubblefy.Business/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Bubblefy.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

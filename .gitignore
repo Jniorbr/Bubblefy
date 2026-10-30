@@ -1,7 +1,4 @@
-**/bin/
-**/obj/
-.vs/
-*.db
-*.db-shm
-*.db-wal
-*.zip
+node_modules/
+dist/
+.angular/
+out-tsc/

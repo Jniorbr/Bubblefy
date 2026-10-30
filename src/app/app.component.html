@@ -1,0 +1,21 @@
+<header>
+  <a routerLink="/faixas" class="logo">Bubblefy</a>
+  <nav>
+    <a routerLink="/faixas" routerLinkActive="ativo">Faixas</a>
+    @if (auth.logado()) {
+      <a routerLink="/playlists" routerLinkActive="ativo">Playlists</a>
+    }
+  </nav>
+  <div class="usuario">
+    @if (auth.logado()) {
+      <span>{{ auth.usuario()?.nome }}</span>
+      <button type="button" (click)="auth.sair()">Sair</button>
+    } @else {
+      <a routerLink="/login">Entrar</a>
+      <a routerLink="/cadastro">Cadastrar</a>
+    }
+  </div>
+</header>
+<main>
+  <router-outlet />
+</main>

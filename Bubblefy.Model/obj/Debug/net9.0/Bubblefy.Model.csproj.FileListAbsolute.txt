@@ -1,0 +1,12 @@
+C:\Bubblefy\Bubblefy\Bubblefy.Model\bin\Debug\net9.0\Bubblefy.Model.deps.json
+C:\Bubblefy\Bubblefy\Bubblefy.Model\bin\Debug\net9.0\Bubblefy.Model.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Model\bin\Debug\net9.0\Bubblefy.Model.pdb
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.AssemblyInfoInputs.cache
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.AssemblyInfo.cs
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.csproj.CoreCompileInputs.cache
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.sourcelink.json
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\refint\Bubblefy.Model.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\Bubblefy.Model.pdb
+C:\Bubblefy\Bubblefy\Bubblefy.Model\obj\Debug\net9.0\ref\Bubblefy.Model.dll

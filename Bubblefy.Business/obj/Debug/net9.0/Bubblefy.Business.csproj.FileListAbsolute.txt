@@ -1,0 +1,16 @@
+C:\Bubblefy\Bubblefy\Bubblefy.Business\bin\Debug\net9.0\Bubblefy.Business.deps.json
+C:\Bubblefy\Bubblefy\Bubblefy.Business\bin\Debug\net9.0\Bubblefy.Business.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Business\bin\Debug\net9.0\Bubblefy.Business.pdb
+C:\Bubblefy\Bubblefy\Bubblefy.Business\bin\Debug\net9.0\Bubblefy.Model.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Business\bin\Debug\net9.0\Bubblefy.Model.pdb
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.csproj.AssemblyReference.cache
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.AssemblyInfoInputs.cache
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.AssemblyInfo.cs
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.csproj.CoreCompileInputs.cache
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.sourcelink.json
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.054B204D.Up2Date
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\refint\Bubblefy.Business.dll
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\Bubblefy.Business.pdb
+C:\Bubblefy\Bubblefy\Bubblefy.Business\obj\Debug\net9.0\ref\Bubblefy.Business.dll

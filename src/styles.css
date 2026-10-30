@@ -1,0 +1,28 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #121212; color: #eee; }
+a { color: #1db954; text-decoration: none; }
+a:hover { text-decoration: underline; }
+header { display: flex; align-items: center; gap: 24px; padding: 12px 24px; background: #000; }
+header nav { display: flex; gap: 16px; flex: 1; }
+header .logo { font-weight: bold; font-size: 20px; }
+header .usuario { display: flex; align-items: center; gap: 12px; }
+header .ativo { text-decoration: underline; }
+main { max-width: 1000px; margin: 0 auto; padding: 24px; }
+h1 { margin-top: 0; }
+form.filtros { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; margin-bottom: 16px; }
+form.formulario { display: flex; flex-direction: column; gap: 12px; max-width: 320px; }
+label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; }
+input, select { padding: 8px; border: 1px solid #444; border-radius: 4px; background: #222; color: #eee; }
+input[type=number] { width: 110px; }
+input[type=checkbox] { width: auto; }
+button { padding: 8px 16px; border: 0; border-radius: 4px; background: #1db954; color: #000; cursor: pointer; }
+button:disabled { background: #444; color: #888; cursor: not-allowed; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid #2a2a2a; }
+th { color: #aaa; font-weight: normal; }
+.erro { color: #ff6b6b; }
+.nova-playlist { position: sticky; bottom: 0; padding: 12px 0; background: #121212; }
+.nova-playlist form { display: flex; gap: 12px; }
+.nova-playlist input { flex: 1; }
+ul.lista { list-style: none; padding: 0; }
+ul.lista li { padding: 12px 0; border-bottom: 1px solid #2a2a2a; }

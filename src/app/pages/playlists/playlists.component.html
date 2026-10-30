@@ -1,0 +1,18 @@
+<h1>Minhas playlists</h1>
+
+@if (erro()) {
+  <p class="erro">{{ erro() }}</p>
+}
+
+@if (playlists().length === 0 && !erro()) {
+  <p>Você ainda não tem playlists. Selecione faixas em <a routerLink="/faixas">Faixas</a> para criar uma.</p>
+}
+
+<ul class="lista">
+  @for (playlist of playlists(); track playlist.id) {
+    <li>
+      <a [routerLink]="['/playlists', playlist.id]">{{ playlist.nome }}</a>
+      ({{ playlist.faixas.length }} faixas)
+    </li>
+  }
+</ul>

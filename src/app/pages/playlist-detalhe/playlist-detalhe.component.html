@@ -1,0 +1,35 @@
+<p><a routerLink="/playlists">Voltar</a></p>
+
+@if (erro()) {
+  <p class="erro">{{ erro() }}</p>
+}
+
+@if (playlist(); as p) {
+  <h1>{{ p.nome }}</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Artista</th>
+        <th>Gênero</th>
+        <th>País</th>
+        <th>Ano</th>
+        <th>BPM</th>
+        <th>Valência</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (faixa of p.faixas; track faixa.id) {
+        <tr>
+          <td>{{ faixa.titulo }}</td>
+          <td>{{ faixa.artista }}</td>
+          <td>{{ faixa.genero }}</td>
+          <td>{{ faixa.pais }}</td>
+          <td>{{ faixa.ano }}</td>
+          <td>{{ faixa.bpmMedia }}</td>
+          <td>{{ faixa.valencia }}</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}

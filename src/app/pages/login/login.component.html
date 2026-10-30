@@ -1,0 +1,16 @@
+<h1>Entrar</h1>
+<form class="formulario" (ngSubmit)="entrar()">
+  <label>
+    Nome
+    <input name="nome" [(ngModel)]="nome" maxlength="50" required>
+  </label>
+  <label>
+    Senha
+    <input name="senha" type="password" [(ngModel)]="senha" required>
+  </label>
+  @if (erro()) {
+    <p class="erro">{{ erro() }}</p>
+  }
+  <button type="submit">Entrar</button>
+</form>
+<p>Ainda não tem conta? <a routerLink="/cadastro">Cadastre-se</a></p>

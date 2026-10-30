@@ -1,0 +1,98 @@
+<h1>Faixas</h1>
+
+<form class="filtros" (ngSubmit)="buscar()">
+  <label>
+    Gênero
+    <select name="genero" [(ngModel)]="filtro.genero">
+      <option [ngValue]="null">Todos</option>
+      @for (genero of generos(); track genero) {
+        <option [ngValue]="genero">{{ genero }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    País
+    <select name="pais" [(ngModel)]="filtro.pais">
+      <option [ngValue]="null">Todos</option>
+      @for (pais of paises(); track pais) {
+        <option [ngValue]="pais">{{ pais }}</option>
+      }
+    </select>
+  </label>
+  <label>
+    Ano
+    <input name="ano" type="number" [(ngModel)]="filtro.ano">
+  </label>
+  <label>
+    BPM mínimo
+    <input name="bpmMediaMinima" type="number" [(ngModel)]="filtro.bpmMediaMinima">
+  </label>
+  <label>
+    BPM máximo
+    <input name="bpmMediaMaxima" type="number" [(ngModel)]="filtro.bpmMediaMaxima">
+  </label>
+  <label>
+    Valência mín.
+    <input name="valenciaMinima" type="number" min="1" max="5" [(ngModel)]="filtro.valenciaMinima">
+  </label>
+  <label>
+    Valência máx.
+    <input name="valenciaMaxima" type="number" min="1" max="5" [(ngModel)]="filtro.valenciaMaxima">
+  </label>
+  <button type="submit">Buscar</button>
+  <button type="button" (click)="limpar()">Limpar</button>
+</form>
+
+@if (erro()) {
+  <p class="erro">{{ erro() }}</p>
+}
+
+<p>{{ faixas().length }} faixas encontradas</p>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Título</th>
+      <th>Artista</th>
+      <th>Gênero</th>
+      <th>País</th>
+      <th>Ano</th>
+      <th>BPM</th>
+      <th>Valência</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (faixa of exibidas(); track faixa.id) {
+      <tr>
+        <td>
+          <input type="checkbox" [checked]="selecionadas().includes(faixa.id)" (change)="alternar(faixa.id)">
+        </td>
+        <td>{{ faixa.titulo }}</td>
+        <td>{{ faixa.artista }}</td>
+        <td>{{ faixa.genero }}</td>
+        <td>{{ faixa.pais }}</td>
+        <td>{{ faixa.ano }}</td>
+        <td>{{ faixa.bpmMedia }}</td>
+        <td>{{ faixa.valencia }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+@if (faixas().length > exibidas().length) {
+  <p><button type="button" (click)="mostrarMais()">Mostrar mais</button></p>
+}
+
+<section class="nova-playlist">
+  @if (auth.logado()) {
+    <form (ngSubmit)="criarPlaylist()">
+      <input name="nomePlaylist" [(ngModel)]="nomePlaylist" placeholder="Nome da playlist" maxlength="100" required>
+      <button type="submit" [disabled]="selecionadas().length === 0">
+        Criar playlist ({{ selecionadas().length }})
+      </button>
+    </form>
+  } @else {
+    <p><a routerLink="/login">Entre</a> para criar playlists com as faixas selecionadas.</p>
+  }
+</section>
